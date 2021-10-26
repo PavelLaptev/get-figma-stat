@@ -42,8 +42,8 @@ const App = () => {
 
           const newData = {
             Installs: clearDataItem("installCount", "Installs"),
-            Likes: clearDataItem("likeCount", "Likes"),
             Views: clearDataItem("viewCount", "Views"),
+            Likes: clearDataItem("likeCount", "Likes"),
             Comments: clearDataItem("commentCount", "Comments"),
           };
 
@@ -62,9 +62,14 @@ const App = () => {
 
   const Bars = () => {
     if (fetchedData) {
-      return Object.keys(fetchedData).map((name, i) => (
-        <Chart key={i} bar={name} title={name} data={fetchedData[name]} />
-      ));
+      return (
+        <>
+          <section>hello</section>
+          {Object.keys(fetchedData).map((name, i) => (
+            <Chart key={i} bar={name} title={name} data={fetchedData[name]} />
+          ))}
+        </>
+      );
     }
   };
 
