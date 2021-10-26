@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  font-size: 20px;
+  padding: 16px;
+  height: 56px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.primary {
+  background: var(--secondary-clr);
+  border: 2px solid var(--primary-clr);
+}
+
+.secondary {
+  color: var(--secondary-clr);
+  background: var(--primary-clr);
+}

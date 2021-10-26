@@ -7,26 +7,26 @@ import {
   XAxis,
   ResponsiveContainer,
   Tooltip,
-  Legend,
 } from "recharts";
 import styles from "./styles.module.scss";
 
 interface Props {
   data: Array<object>;
+  bar: string;
+  title: string;
 }
 
 const Chart: React.FunctionComponent<Props> = (props) => {
   return (
     <section className={styles.wrap}>
-      <h1>Hello Chart</h1>
-      <ResponsiveContainer width={700} height="80%">
-        <BarChart data={props.data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+      <h3 className={styles.title}>{props.title}</h3>
+      <ResponsiveContainer width={"100%"} height={180}>
+        <BarChart data={props.data} className={styles.chart}>
+          <CartesianGrid />
+          <XAxis dataKey="date" tick={{ fontSize: 12, fontFamily: "Inter" }} />
+          <YAxis mirror tick={{ fontSize: 12, fontFamily: "Inter" }} />
           <Tooltip />
-          <Legend />
-          <Bar dataKey="uv" fill="#8884d8" />
+          <Bar dataKey={props.bar} fill={"var(--primary-clr)"} />
         </BarChart>
       </ResponsiveContainer>
     </section>

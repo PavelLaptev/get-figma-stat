@@ -1,0 +1,22 @@
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 140px;
+}
+
+.countItem {
+  display: flex;
+  flex-direction: column;
+  margin-right: 32px;
+  margin-top: 16px;
+  span {
+    font-size: 13px;
+    color: var(--primary-clr);
+    opacity: 0.5;
+  }
+  p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: var(--primary-clr);
+  }
+}
