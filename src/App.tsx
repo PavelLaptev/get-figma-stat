@@ -3,9 +3,9 @@ import Chart from "./components/Chart";
 import SearchSwitcher from "./components/SearchSwitcher";
 import SearchInput from "./components/SearchInput";
 import TotalCount from "./components/TotalCount";
-import InfoBox from "./components/Button";
+import InfoBox from "./components/InfoBox";
 import Icon from "./components/Icon";
-// import HowTo from "./components/InfoBox copy";
+import HowTo from "./components/InfoBox";
 
 import styles from "./app.module.scss";
 
@@ -85,7 +85,7 @@ const App = () => {
             category={categoryState}
           />
           <Chart data={fetchedCountersData} category={categoryState} />
-          {/* <HowTo id={idState} links={linkState} category={categoryState} /> */}
+          <HowTo id={idState} links={linkState} category={categoryState} />
         </>
       );
     }
