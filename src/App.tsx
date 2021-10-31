@@ -5,7 +5,7 @@ import SearchInput from "./components/SearchInput";
 import TotalCount from "./components/TotalCount";
 import InfoBox from "./components/InfoBox";
 import Icon from "./components/Icon";
-import HowTo from "./components/InfoBox";
+import HowTo from "./components/HowTo";
 
 import styles from "./app.module.scss";
 

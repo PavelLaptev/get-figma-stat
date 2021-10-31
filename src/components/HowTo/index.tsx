@@ -1,6 +1,6 @@
 import * as React from "react";
 import TextLink from "../TextLink";
-// import CodeBlock from "../CodeBlock";
+import CodeBlock from "../CodeBlock";
 
 import styles from "./styles.module.scss";
 
