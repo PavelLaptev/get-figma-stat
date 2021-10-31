@@ -2,13 +2,27 @@
   display: flex;
   width: fit-content;
   margin-bottom: 32px;
+  height: 56px;
   box-shadow: inset 0 0 0 2px var(--primary-clr);
+  background: var(--primary-clr);
+}
+
+.button {
+  width: 100px;
+  border: none;
+  transition: all 0.05s ease-in-out;
 }
 
 .skewLeft {
   transform: skewY(10deg) translateY(-9px);
+  &:hover {
+    transform: skewY(8deg) translateY(-7px);
+  }
 }
 
 .skewRight {
-  transform: skewY(-10deg) translateY(-7px);
+  transform: skewY(-10deg) translateY(-9px);
+  &:hover {
+    transform: skewY(-8deg) translateY(-7px);
+  }
 }

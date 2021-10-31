@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 interface Props {
   className?: string;
-  category: boolean;
+  category: "plugins" | "hub_files";
 }
 
 interface CountItemProps {
@@ -64,7 +64,7 @@ const TotalCount: React.FunctionComponent<Props> = (props) => {
 
   return (
     <>
-      {props.category ? (
+      {props.category === "plugins" ? (
         <section className={`${styles.wrap} ${props.className}`}>
           <CountItem
             label={"Total:"}

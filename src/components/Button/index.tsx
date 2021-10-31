@@ -14,7 +14,7 @@ const Button: React.FunctionComponent<Props> = (props) => {
       className={`${styles.wrap} ${props.className} ${styles[`${props.mode}`]}`}
       onClick={(e) => props.onClick(e)}
     >
-      {props.text}
+      <span>{props.text}</span>
     </button>
   );
 };

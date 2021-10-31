@@ -3,6 +3,12 @@
   --secondary-clr: #ffffff;
   --active-clr: rgb(131, 86, 255);
   --input-hover-clr: rgba(0, 0, 0, 0.02);
+
+  --chart-1-clr: rgb(0, 0, 0);
+  --chart-2-clr: var(--active-clr);
+  --chart-3-clr: rgb(240, 66, 133);
+  --chart-4-clr: rgb(27, 206, 182);
+  --chart-5-clr: rgb(170, 170, 170);
 }
 
 .main {
@@ -17,8 +23,27 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 840px;
+  max-width: 860px;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
+}
+
+.ghButton {
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px;
+  &:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+  }
+  &:hover {
+    svg {
+      fill: var(--active-clr);
+    }
+  }
 }

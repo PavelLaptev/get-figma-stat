@@ -21,13 +21,13 @@ const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
         text="Plugins"
         onClick={handleClick}
         mode={!toggle ? "secondary" : "primary"}
-        className={toggle ? styles.skewLeft : ""}
+        className={`${styles.button} ${toggle ? styles.skewLeft : ""}`}
       />
       <Button
         text="Files"
         onClick={handleClick}
         mode={toggle ? "secondary" : "primary"}
-        className={!toggle ? styles.skewRight : ""}
+        className={`${styles.button} ${!toggle ? styles.skewRight : ""}`}
       />
     </div>
   );

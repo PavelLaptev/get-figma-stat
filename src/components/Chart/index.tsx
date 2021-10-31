@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   CartesianGrid,
   YAxis,
   XAxis,
@@ -11,28 +11,55 @@ import {
 import styles from "./styles.module.scss";
 
 interface Props {
-  data: Array<object>;
-  bar: string;
-  title: string;
+  data: Array<any>;
+  category: "plugins" | "hub_files";
 }
 
 const Chart: React.FunctionComponent<Props> = (props) => {
   return (
     <section className={styles.wrap}>
-      <h3 className={styles.title}>{props.title}</h3>
-      <ResponsiveContainer width={"100%"} height={180}>
-        <BarChart data={props.data} className={styles.chart}>
+      <ResponsiveContainer width={"100%"} height={260}>
+        <LineChart data={props.data} className={styles.chart}>
           <CartesianGrid />
           <XAxis dataKey="date" tick={{ fontSize: 12, fontFamily: "Inter" }} />
           <YAxis mirror tick={{ fontSize: 12, fontFamily: "Inter" }} />
           <Tooltip />
-          <Bar dataKey={props.bar} fill={"var(--primary-clr)"} />
-        </BarChart>
+          <Line
+            dataKey={"views"}
+            fill={"var(--chart-1-clr)"}
+            stroke={"var(--chart-1-clr)"}
+            dot={false}
+            strokeWidth={2}
+          />
+          <Line
+            dataKey={props.category === "plugins" ? "installs" : "duplicates"}
+            fill={"var(--chart-2-clr)"}
+            stroke={"var(--chart-2-clr)"}
+            dot={false}
+            strokeWidth={2}
+          />
+          <Line
+            dataKey={"likes"}
+            fill={"var(--chart-3-clr)"}
+            stroke={"var(--chart-3-clr)"}
+            dot={false}
+            strokeWidth={2}
+          />
+          <Line
+            dataKey={"comments"}
+            fill={"var(--chart-4-clr)"}
+            stroke={"var(--chart-4-clr)"}
+            dot={false}
+            strokeWidth={2}
+          />
+        </LineChart>
       </ResponsiveContainer>
     </section>
   );
 };
 
-Chart.defaultProps = {} as Partial<Props>;
+Chart.defaultProps = {
+  lineChart: false,
+} as Partial<Props>;
 
 export default Chart;

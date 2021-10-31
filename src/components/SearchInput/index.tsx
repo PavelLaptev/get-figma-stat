@@ -33,7 +33,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
         disabled={val === "" ? true : false}
         onClick={onSubmit}
       >
-        <Icon name="arrow" />
+        <Icon className={styles.arrow} name="arrow" />
       </button>
     </form>
   );
