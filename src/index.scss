@@ -2,6 +2,23 @@
 @import "./styles/mixins.scss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
+.lightTheme {
+  --primary-clr: #000;
+  --secondary-clr: #ffffff;
+  --active-light-clr: rgba(131, 86, 255, 0.4);
+  --active-clr: rgb(105, 55, 245);
+  --input-hover-clr: rgba(0, 0, 0, 0.02);
+
+  --chart-1-clr: rgb(0, 0, 0);
+  --chart-2-clr: var(--active-clr);
+  --chart-3-clr: rgb(240, 66, 133);
+  --chart-4-clr: rgb(27, 206, 182);
+  --chart-5-clr: rgb(170, 170, 170);
+
+  --error-clr: #f45;
+  --error-light-clr: rgb(255, 202, 206);
+}
+
 *,
 *:after,
 *:before {
@@ -9,7 +26,7 @@
 }
 
 ::selection {
-  background-color: var(--active-clr);
+  background-color: var(--active-light-clr);
 }
 
 body {
@@ -43,4 +60,12 @@ p {
   font-size: 16px;
   line-height: 140%;
   margin: 8px 0;
+}
+
+a {
+  color: var(--primary-clr);
+  &:hover {
+    color: var(--active-clr);
+    // text-decoration: none;
+  }
 }

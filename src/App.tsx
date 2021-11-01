@@ -11,6 +11,7 @@ import styles from "./app.module.scss";
 
 const App = () => {
   const [idState, setIdState] = React.useState("");
+  const [errorState, setErrorState] = React.useState(false);
   const [linkState, setLinkState] = React.useState({} as LinksTypes);
   const [categoryState, setCategoryState] = React.useState(
     "plugins" as "plugins" | "hub_files"
@@ -21,7 +22,27 @@ const App = () => {
   const [latestCounters, setLatestCounters] = React.useState(null as any);
   const [fetchedInfoData, setFetchedInfoData] = React.useState(null as any);
 
+  /////////////////////////////////////////////
+
+  React.useEffect(() => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const category = params.get("category");
+    const id = params.get("id");
+  }, [idState]);
+
+  /////////////////////////////////////////////
+
   const handleFetchData = async (id: string) => {
+    if ("URLSearchParams" in window) {
+      var searchParams = new URLSearchParams(window.location.search);
+      searchParams.set("category", categoryState);
+      searchParams.set("id", id);
+      var newRelativePathQuery =
+        window.location.pathname + "?" + searchParams.toString();
+      window.history.pushState(null, "", newRelativePathQuery);
+    }
+
     const link = {
       info: `https://pavellaptev.github.io/figma-stat/${categoryState}/${id}/info.json`,
       counters: `https://pavellaptev.github.io/figma-stat/${categoryState}/${id}/counters.json`,
@@ -65,12 +86,12 @@ const App = () => {
       await fetch(link.info)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setFetchedInfoData(data);
         });
     } catch (error) {
+      setErrorState(true);
       console.error(
-        `Oops! Seems like there is no ${categoryState} with this ID yet`
+        `Oops! Seems like there is no file with this ID yet in ${categoryState}`
       );
     }
   };
@@ -92,7 +113,7 @@ const App = () => {
   };
 
   return (
-    <main className={`${styles.main} ${styles.lightTheme}`}>
+    <main className={`${styles.main} lightTheme`}>
       <a
         className={styles.ghButton}
         href="https://github.com/PavelLaptev/figma-stat"
@@ -107,12 +128,15 @@ const App = () => {
         <SearchSwitcher
           onClick={(val) => {
             setFetchedCountersData(null);
+            setErrorState(false);
             val ? setCategoryState("plugins") : setCategoryState("hub_files");
           }}
         />
         <SearchInput
+          isErroor={errorState}
           placeholder={categoryState === "plugins" ? "Plugin ID" : "File ID"}
           onSubmit={handleFetchData}
+          onChange={() => setErrorState(false)}
         />
         {Bars()}
         {!fetchedCountersData ? <TotalCount category={categoryState} /> : null}
