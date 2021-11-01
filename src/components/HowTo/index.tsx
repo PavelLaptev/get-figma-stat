@@ -50,7 +50,7 @@ const HowTo: React.FunctionComponent<Props> = (props) => {
     <section className={styles.wrap}>
       <h3>How it works</h3>
       <p>
-        Everyday at 6 am (UTC timezone) the gitHub script captures all avalible
+        Everyday at 6 am (UTC timezone) the github script captures all avalible
         Figma plugins and files.
         <br />
         All information is stored in a separate{" "}
