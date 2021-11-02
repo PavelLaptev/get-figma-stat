@@ -5,13 +5,14 @@ import Icon from "../../components/Icon";
 interface Props {
   className?: string;
   placeholder?: string;
+  value?: string;
   isErroor?: boolean;
   onSubmit: (value: string) => void;
   onChange: (value: string) => void;
 }
 
 const SearchInput: React.FunctionComponent<Props> = (props) => {
-  const [val, setVal] = React.useState("");
+  const [val, setVal] = React.useState(props.value || "");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value);

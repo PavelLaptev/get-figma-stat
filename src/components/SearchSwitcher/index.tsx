@@ -3,16 +3,18 @@ import Button from "../Button";
 import styles from "./styles.module.scss";
 
 interface Props {
+  value: string;
   className?: string;
-  onClick: (val: boolean) => void;
+  onClick: (val: string) => void;
 }
 
 const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
-  const [toggle, setToggle] = React.useState(false);
+  const [categoryState, setCategoryState] = React.useState(props.value);
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    setToggle(!toggle);
-    props.onClick(toggle);
+  const handleClick = (text: string) => {
+    const value = text.toLowerCase().replace(/\s+/g, "_");
+    setCategoryState(value);
+    props.onClick(value);
   };
 
   return (
@@ -20,14 +22,18 @@ const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
       <Button
         text="Plugins"
         onClick={handleClick}
-        mode={!toggle ? "secondary" : "primary"}
-        className={`${styles.button} ${toggle ? styles.skewLeft : ""}`}
+        mode={categoryState === "plugins" ? "secondary" : "primary"}
+        className={`${styles.button} ${
+          categoryState !== "plugins" ? styles.skewLeft : ""
+        }`}
       />
       <Button
-        text="Files"
+        text="Hub files"
         onClick={handleClick}
-        mode={toggle ? "secondary" : "primary"}
-        className={`${styles.button} ${!toggle ? styles.skewRight : ""}`}
+        mode={categoryState !== "plugins" ? "secondary" : "primary"}
+        className={`${styles.button} ${
+          categoryState === "plugins" ? styles.skewRight : ""
+        }`}
       />
     </div>
   );
