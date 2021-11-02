@@ -4,28 +4,12 @@ import styles from "./styles.module.scss";
 
 interface Props {
   className?: string;
-  category: "plugins" | "hub_files";
+  category: string;
 }
 
 interface CountItemProps {
   label: string;
   value: string;
-}
-
-interface TotalPluginsProps {
-  commentCount: number;
-  installCount: number;
-  likeCount: number;
-  plugins: number;
-  viewCount: number;
-}
-
-interface TotalFilesProps {
-  commentCount: number;
-  duplicateCount: number;
-  likeCount: number;
-  files: number;
-  viewCount: number;
 }
 
 const CountItem: React.FunctionComponent<CountItemProps> = (props) => {
@@ -37,74 +21,68 @@ const CountItem: React.FunctionComponent<CountItemProps> = (props) => {
   );
 };
 
-const links = {
-  plugins: "https://pavellaptev.github.io/figma-stat/plugins/total.json",
-  files: "https://pavellaptev.github.io/figma-stat/hub_files/total.json",
-};
-
 const TotalCount: React.FunctionComponent<Props> = (props) => {
-  const [pluginsData, setPluginsData] = React.useState({} as TotalPluginsProps);
-  const [filesData, setFilesData] = React.useState({} as TotalFilesProps);
+  const [totalData, setTotalData] = React.useState({} as any);
 
   React.useEffect(() => {
-    fetch(links.plugins)
+    let isMounted = true;
+
+    fetch(
+      `https://pavellaptev.github.io/figma-stat/${props.category}/total.json`
+    )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setPluginsData(data);
+        if (isMounted) {
+          console.log(data);
+          setTotalData(data);
+        }
       });
 
-    fetch(links.files)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setFilesData(data);
-      });
-  }, []);
+    return () => {
+      isMounted = false;
+    };
+  }, [props.category]);
 
   return (
     <>
       {props.category === "plugins" ? (
         <section className={`${styles.wrap} ${props.className}`}>
-          <CountItem
-            label={"Total:"}
-            value={numToString(pluginsData.plugins)}
-          />
+          <CountItem label={"Total:"} value={numToString(totalData.plugins)} />
           <CountItem
             label={"Installs:"}
-            value={numToString(pluginsData.installCount)}
+            value={numToString(totalData.installCount)}
           />
           <CountItem
             label={"Likes:"}
-            value={numToString(pluginsData.likeCount)}
+            value={numToString(totalData.likeCount)}
           />
           <CountItem
             label={"Views:"}
-            value={numToString(pluginsData.viewCount)}
+            value={numToString(totalData.viewCount)}
           />
           <CountItem
             label={"Comments:"}
-            value={numToString(pluginsData.commentCount)}
+            value={numToString(totalData.commentCount)}
           />
         </section>
       ) : (
         <section className={`${styles.wrap} ${props.className}`}>
-          <CountItem label={"Total:"} value={numToString(filesData.files)} />
+          <CountItem label={"Total:"} value={numToString(totalData.files)} />
           <CountItem
             label={"Duplicates:"}
-            value={numToString(filesData.duplicateCount)}
+            value={numToString(totalData.duplicateCount)}
           />
           <CountItem
             label={"Likes:"}
-            value={numToString(filesData.likeCount)}
+            value={numToString(totalData.likeCount)}
           />
           <CountItem
             label={"Views:"}
-            value={numToString(filesData.viewCount)}
+            value={numToString(totalData.viewCount)}
           />
           <CountItem
             label={"Comments:"}
-            value={numToString(filesData.commentCount)}
+            value={numToString(totalData.commentCount)}
           />
         </section>
       )}

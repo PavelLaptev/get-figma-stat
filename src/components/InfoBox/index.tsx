@@ -7,7 +7,7 @@ interface Props {
   info: any;
   counters: any;
   className?: string;
-  category: "plugins" | "hub_files";
+  category: string;
 }
 
 const InfoBox: React.FunctionComponent<Props> = (props) => {

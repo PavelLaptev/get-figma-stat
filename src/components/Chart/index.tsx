@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 
 interface Props {
   data: Array<any>;
-  category: "plugins" | "hub_files";
+  category: string;
 }
 
 const Chart: React.FunctionComponent<Props> = (props) => {

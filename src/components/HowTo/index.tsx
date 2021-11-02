@@ -6,8 +6,8 @@ import styles from "./styles.module.scss";
 
 interface Props {
   id: string;
-  links: LinksTypes;
-  category: "plugins" | "hub_files";
+  links: any;
+  category: string;
 }
 
 const HowTo: React.FunctionComponent<Props> = (props) => {
