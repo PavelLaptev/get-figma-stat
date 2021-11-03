@@ -6,12 +6,13 @@ interface Props {
   className?: string;
   placeholder?: string;
   value?: string;
-  isErroor?: boolean;
+  isError?: boolean;
   onSubmit: (value: string) => void;
   onChange: (value: string) => void;
 }
 
 const SearchInput: React.FunctionComponent<Props> = (props) => {
+  const [story, setStory] = React.useState(0);
   const [val, setVal] = React.useState(props.value || "");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,14 +22,18 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
 
   const onSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (props.isError) {
+      console.log("error");
+      setStory(story + 1);
+    }
     props.onSubmit(val);
   };
 
   return (
-    <section className={styles.wrap}>
+    <section className={styles.wrap} key={story}>
       <form
         className={`${styles.form} ${props.className} ${
-          props.isErroor ? styles.errorInput : ""
+          props.isError ? styles.errorInput : ""
         }`}
       >
         <input
@@ -46,7 +51,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
           <Icon className={styles.arrow} name="arrow" />
         </button>
       </form>
-      {props.isErroor ? (
+      {props.isError ? (
         <div className={styles.errorMessage}>
           Oops! Can't find it. Check the ID or category.
         </div>

@@ -33,6 +33,10 @@ const App = () => {
   const [allCountersState, setAllCountersState] = React.useState(null as any);
   const [infoState, setInfoState] = React.useState(null as any);
 
+  const [triggerSearch, setTriggerSearch] = React.useState(false);
+
+  const [errorState, setErrorState] = React.useState(false);
+
   /////////////////////////////////////////////
 
   const fetchData = async (id: string, category: string) => {
@@ -47,6 +51,8 @@ const App = () => {
       await fetch(link.counters)
         .then((response) => response.json())
         .then((data) => {
+          setErrorState(false);
+
           const clearDataItem = () => {
             return data
               .map((item: any, i: any) => {
@@ -72,7 +78,7 @@ const App = () => {
           setLatestCountersState(data.slice(-1)[0]);
           setAllCountersState(clearDataItem());
 
-          console.log(clearDataItem());
+          // console.log(clearDataItem());
         });
 
       await fetch(link.info)
@@ -81,6 +87,7 @@ const App = () => {
           setInfoState(data);
         });
     } catch (error) {
+      setErrorState(true);
       console.error(`Oops! Seems like there is no file with this ID yet`);
     }
   };
@@ -106,10 +113,11 @@ const App = () => {
     setQuery("id", idState);
     setQuery("category", categoryState);
 
-    if (idState !== "" && categoryState !== "") {
+    if (getQuery("id") !== "" && getQuery("category") !== "") {
+      console.log("fetching data …");
       fetchData(idState, categoryState);
     }
-  }, [idState, categoryState]);
+  }, [idState, categoryState, triggerSearch]);
 
   /////////////////////////////////////////////
 
@@ -129,15 +137,17 @@ const App = () => {
         <SearchSwitcher
           value={categoryState}
           onClick={(value) => {
+            setAllCountersState("");
             setCategoryState(value);
           }}
         />
         <SearchInput
           value={idState}
-          isErroor={false}
+          isError={errorState}
           placeholder={categoryState === "plugins" ? "Plugin ID" : "File ID"}
           onSubmit={(value) => {
             setIdState(value);
+            setTriggerSearch(!triggerSearch);
           }}
           onChange={() => {}}
         />

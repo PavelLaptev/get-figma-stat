@@ -3,7 +3,7 @@
   display: flex;
   width: fit-content;
   margin-bottom: 24px;
-  height: 56px;
+  height: 57px;
   box-shadow: inset 0 0 0 2px var(--primary-clr);
   // background: var(--primary-clr);
 }
@@ -15,16 +15,16 @@
 
 .skewLeft {
   pointer-events: auto;
-  transform: skewY(10deg) translateY(-11px);
+  transform: skewY(10deg) translateY(-10px);
   &:hover {
-    transform: skewY(8deg) translateY(-9px);
+    transform: skewY(8deg) translateY(-8px);
   }
 }
 
 .skewRight {
   pointer-events: auto;
-  transform: skewY(-10deg) translateY(-11px);
+  transform: skewY(-10deg) translateY(-10px);
   &:hover {
-    transform: skewY(-8deg) translateY(-9px);
+    transform: skewY(-8deg) translateY(-8px);
   }
 }
