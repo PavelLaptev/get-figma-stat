@@ -69,9 +69,8 @@ const HowTo: React.FunctionComponent<Props> = (props) => {
   ////////////////////////////////////////
 
   React.useEffect(() => {
-    console.log("sdf");
     fetchData(props.id, props.category);
-  }, []);
+  }, [props.id, props.category]);
 
   ////////////////////////////////////////
 

@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "./components/Chart";
 import SearchSwitcher from "./components/SearchSwitcher";
 import SearchInput from "./components/SearchInput";
-import TotalCount from "./components/TotalCount";
 import InfoBox from "./components/InfoBox";
 import Icon from "./components/Icon";
 
@@ -95,14 +94,14 @@ const App = () => {
   const Bars = () => {
     if (allCountersState && infoState) {
       return (
-        <>
+        <section className={styles.statBlock}>
           <InfoBox
             counters={latestCountersState}
             info={infoState}
             category={categoryState}
           />
           <Chart data={allCountersState} category={categoryState} />
-        </>
+        </section>
       );
     }
   };
@@ -151,7 +150,6 @@ const App = () => {
           }}
           onChange={() => {}}
         />
-        {!allCountersState ? <TotalCount category={categoryState} /> : null}
         {Bars()}
       </section>
     </main>
