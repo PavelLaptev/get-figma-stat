@@ -53,7 +53,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
       </form>
       {props.isError ? (
         <div className={styles.errorMessage}>
-          Oops! Can't find it. Check the ID or category.
+          Oops! Can't find it. Check the ID or the category.
         </div>
       ) : null}
     </section>

@@ -42,8 +42,6 @@ const App = () => {
     const link = {
       info: `https://pavellaptev.github.io/figma-stat/${category}/${id}/info.json`,
       counters: `https://pavellaptev.github.io/figma-stat/${category}/${id}/counters.json`,
-      latest: `https://pavellaptev.github.io/figma-stat/${category}/${id}/latest.json`,
-      change: `https://pavellaptev.github.io/figma-stat/${category}/${id}/change.json`,
     };
 
     try {
@@ -77,7 +75,7 @@ const App = () => {
           setLatestCountersState(data.slice(-1)[0]);
           setAllCountersState(clearDataItem());
 
-          // console.log(clearDataItem());
+          console.log(clearDataItem());
         });
 
       await fetch(link.info)
