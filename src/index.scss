@@ -4,7 +4,11 @@
 
 .lightTheme {
   --primary-clr: #000;
+  --primary-light-clr: rgb(37, 37, 37);
   --secondary-clr: #ffffff;
+  --secondary-dim-clr: #f2f2f2;
+  --secondary-semidark-clr: #e0e0e0;
+  --secondary-dark-clr: #cacaca;
   --active-light-clr: rgba(131, 86, 255, 0.4);
   --active-clr: rgb(105, 55, 245);
   --input-hover-clr: rgba(0, 0, 0, 0.02);
@@ -17,6 +21,9 @@
 
   --error-clr: #f45;
   --error-light-clr: rgb(255, 202, 206);
+
+  --radius-m: 12px;
+  --radius-s: 8px;
 }
 
 *,
@@ -48,7 +55,7 @@ hr {
 
 h1 {
   @include fluid-type($mobile, $desktop, 40px, 60px);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 h3 {
@@ -64,8 +71,27 @@ p {
 
 a {
   color: var(--primary-clr);
+  text-decoration: none;
   &:hover {
     color: var(--active-clr);
-    // text-decoration: none;
+    text-decoration: underline;
+  }
+}
+
+.recharts-brush {
+}
+
+.recharts-brush-slide {
+  fill: var(--primary-clr);
+  fill-opacity: 0.1;
+}
+
+.recharts-brush-texts {
+  display: none;
+}
+
+.recharts-brush-traveller {
+  rect {
+    fill: var(--primary-clr);
   }
 }

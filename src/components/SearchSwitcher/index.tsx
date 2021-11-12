@@ -20,19 +20,19 @@ const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
   return (
     <div className={`${styles.wrap} ${props.className}`}>
       <Button
-        text="Plugins"
+        label="Plugins"
         onClick={handleClick}
-        mode={categoryState === "plugins" ? "secondary" : "primary"}
+        mode={categoryState !== "plugins" ? "ghost" : "secondary"}
         className={`${styles.button} ${
-          categoryState !== "plugins" ? styles.skewLeft : ""
+          categoryState === "plugins" ? styles.inactive : ""
         }`}
       />
       <Button
-        text="Hub files"
+        label="Hub Files"
         onClick={handleClick}
-        mode={categoryState !== "plugins" ? "secondary" : "primary"}
+        mode={categoryState !== "plugins" ? "secondary" : "ghost"}
         className={`${styles.button} ${
-          categoryState === "plugins" ? styles.skewRight : ""
+          categoryState !== "plugins" ? styles.inactive : ""
         }`}
       />
     </div>

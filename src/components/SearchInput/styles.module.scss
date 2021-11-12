@@ -9,13 +9,14 @@
   width: 100%;
   height: 80px;
   display: flex;
-  border: 2px solid var(--primary-clr);
-  &:hover {
-    background-color: var(--input-hover-clr);
-  }
+  border: none;
+  background-color: var(--secondary-dim-clr);
+  border: 2px solid var(--secondary-dim-clr);
+  border-radius: var(--radius-m);
+  transition: all 0.1s ease;
+  &:hover,
   &:focus-within {
-    border: 2px solid var(--active-clr);
-    background-color: var(--secondary-clr);
+    border: 2px solid var(--secondary-dark-clr);
   }
 }
 
@@ -24,7 +25,8 @@
   width: 100%;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 600;
   padding: 0 20px;
   background-color: transparent;
   transition: 0.1s;
@@ -59,15 +61,18 @@
 }
 
 .errorMessage {
-  padding: 8px;
+  margin-top: 4px;
+  padding: 8px 10px;
   background: var(--error-light-clr);
   font-weight: 600;
+  border-radius: var(--radius-s);
 }
 
 .errorInput {
   border: 2px solid var(--error-clr);
   animation-name: errorAnimation;
   animation-duration: 0.5s;
+  &:hover,
   &:focus-within {
     border: 2px solid var(--error-clr);
   }

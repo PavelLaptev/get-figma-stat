@@ -1,0 +1,52 @@
+@import "../../styles/variables.scss";
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.wrapLeft {
+  display: flex;
+}
+
+.wrapRight {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  border-radius: 8px;
+  background-color: var(--secondary-dim-clr);
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.author {
+  margin-top: 4px;
+  font-size: 14px;
+  span {
+    opacity: 0.4;
+  }
+}
+
+.count {
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.indexNum {
+  width: 18px;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 0.3;
+  margin-right: 16px;
+}

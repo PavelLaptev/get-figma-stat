@@ -1,0 +1,15 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 32px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--secondary-dark-clr);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}

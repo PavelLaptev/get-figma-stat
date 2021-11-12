@@ -1,6 +1,4 @@
-interface LinksTypes {
-  info: string;
-  counters: string;
-  latest: string;
-  change: string;
+interface CategoryProps {
+  plugins: any;
+  hub_files: any;
 }

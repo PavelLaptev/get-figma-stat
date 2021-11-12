@@ -18,12 +18,27 @@ interface Props {
 const Chart: React.FunctionComponent<Props> = (props) => {
   return (
     <section className={styles.wrap}>
-      <ResponsiveContainer width={"100%"} height={260}>
+      <ResponsiveContainer width={"100%"} height={240}>
         <LineChart data={props.data} className={styles.chart}>
           <CartesianGrid />
           <XAxis dataKey="date" tick={{ fontSize: 12, fontFamily: "Inter" }} />
           <YAxis mirror tick={{ fontSize: 12, fontFamily: "Inter" }} />
-          <Tooltip />
+          <Tooltip
+            itemStyle={
+              {
+                padding: "4px",
+                fontWeight: 600,
+                fontSize: 16,
+              } as React.CSSProperties
+            }
+            labelStyle={
+              {
+                fontSize: 16,
+                fontWeight: 700,
+                padding: "4px",
+              } as React.CSSProperties
+            }
+          />
           <Line
             dataKey={"views"}
             fill={"var(--chart-1-clr)"}

@@ -4,6 +4,7 @@ import SearchSwitcher from "./components/SearchSwitcher";
 import SearchInput from "./components/SearchInput";
 import InfoBox from "./components/InfoBox";
 import Icon from "./components/Icon";
+import StatBox from "./components/StatBox";
 
 import styles from "./app.module.scss";
 
@@ -55,7 +56,7 @@ const App = () => {
               .map((item: any, i: any) => {
                 if (data[i - 1]) {
                   return {
-                    date: item.date,
+                    date: item.date.split("-").reverse().join("."),
                     [category === "plugins" ? "installs" : "duplicates"]:
                       category === "plugins"
                         ? item["installCount"] - data[i - 1]["installCount"]
@@ -102,6 +103,8 @@ const App = () => {
         </section>
       );
     }
+
+    return <StatBox category={categoryState} />;
   };
 
   /////////////////////////////////////////////
@@ -130,7 +133,7 @@ const App = () => {
       </a>
 
       <section className={styles.wrap}>
-        <h1>Figma Statistics</h1>
+        <h1>Figma Charts</h1>
         <SearchSwitcher
           value={categoryState}
           onClick={(value) => {
@@ -141,7 +144,11 @@ const App = () => {
         <SearchInput
           value={idState}
           isError={errorState}
-          placeholder={categoryState === "plugins" ? "Plugin ID" : "File ID"}
+          placeholder={
+            categoryState === "plugins"
+              ? "Find by plugin ID"
+              : "Find by file ID"
+          }
           onSubmit={(value) => {
             setIdState(value);
             setTriggerSearch(!triggerSearch);

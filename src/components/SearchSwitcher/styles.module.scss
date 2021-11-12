@@ -1,30 +1,32 @@
+$swithcer-btn-width: 160px;
+$outer-padding: 8px;
+
 .wrap {
-  pointer-events: none;
+  position: relative;
   display: flex;
   width: fit-content;
-  margin-bottom: 24px;
-  height: 57px;
-  box-shadow: inset 0 0 0 2px var(--primary-clr);
-  // background: var(--primary-clr);
+  margin-bottom: 16px;
+  padding: $outer-padding;
+  border-radius: var(--radius-m);
+  background: var(--secondary-dim-clr);
 }
 
 .button {
-  width: 120px;
-  // transition: all 0.05s ease-in-out;
-}
-
-.skewLeft {
-  pointer-events: auto;
-  transform: skewY(10deg) translateY(-10px);
-  &:hover {
-    transform: skewY(8deg) translateY(-8px);
+  margin-right: $outer-padding / 2;
+  &:last-child {
+    margin-right: 0;
   }
 }
 
-.skewRight {
-  pointer-events: auto;
-  transform: skewY(-10deg) translateY(-10px);
-  &:hover {
-    transform: skewY(-8deg) translateY(-8px);
-  }
+.back {
+  position: absolute;
+  z-index: 0;
+  width: $swithcer-btn-width;
+  height: calc(100% - #{$outer-padding * 2});
+  background-color: var(--primary-clr);
+  border-radius: var(--radius-s);
+}
+
+.inactive {
+  pointer-events: none;
 }
