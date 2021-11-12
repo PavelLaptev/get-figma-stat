@@ -14,15 +14,8 @@ interface Props {
   };
   count?: number;
   index?: number;
-  imgLink: string;
-  icon?:
-    | "installs"
-    | "views"
-    | "comments"
-    | "arrow"
-    | "likes"
-    | "duplicates"
-    | "gh";
+  imgLink?: string;
+  icon?: IconProps["name"];
   className?: string;
 }
 
@@ -31,7 +24,9 @@ const ListFigmaItem: React.FunctionComponent<Props> = (props) => {
     <div className={`${styles.wrap} ${props.className}`}>
       <div className={styles.wrapLeft}>
         <span className={styles.indexNum}>{props.index}.</span>
-        <img src={props.imgLink} alt="preview" className={styles.image} />
+        {props.imgLink !== "" ? (
+          <img src={props.imgLink} alt="preview" className={styles.image} />
+        ) : null}
         <div className={styles.leftText}>
           <a
             className={styles.label}
@@ -41,12 +36,14 @@ const ListFigmaItem: React.FunctionComponent<Props> = (props) => {
           >
             {props.label?.name}
           </a>
-          <div className={styles.author}>
-            <span>by </span>
-            <a href={props.caption?.link} target="_blank" rel="noreferrer">
-              {props.caption?.name}{" "}
-            </a>
-          </div>
+          {props.caption?.name !== "" ? (
+            <div className={styles.caption}>
+              <span>by </span>
+              <a href={props.caption?.link} target="_blank" rel="noreferrer">
+                {props.caption?.name}{" "}
+              </a>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={styles.wrapRight}>
@@ -58,8 +55,8 @@ const ListFigmaItem: React.FunctionComponent<Props> = (props) => {
 };
 
 ListFigmaItem.defaultProps = {
-  author: {
-    name: "author",
+  caption: {
+    name: "",
     link: "#",
   },
   label: {
@@ -67,6 +64,7 @@ ListFigmaItem.defaultProps = {
     link: "#",
   },
   index: 0,
+  imgLink: "",
   className: "",
 } as Partial<Props>;
 

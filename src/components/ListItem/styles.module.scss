@@ -2,8 +2,13 @@
 
 .wrap {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  margin: 16px 32px 0 0;
+  margin: 16px 40px 0 0;
+}
+
+.icon {
+  margin-right: 6px;
 }
 
 .label {
@@ -12,7 +17,11 @@
   margin-bottom: 8px;
 }
 
+.valueWrap {
+  display: flex;
+}
+
 .value {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
 }

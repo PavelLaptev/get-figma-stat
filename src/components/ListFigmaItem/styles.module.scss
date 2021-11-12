@@ -11,6 +11,11 @@
   display: flex;
 }
 
+.leftText {
+  display: flex;
+  flex-direction: column;
+}
+
 .wrapRight {
   display: flex;
   align-items: center;
@@ -19,6 +24,7 @@
 .image {
   width: 32px;
   height: 32px;
+  margin-top: -6px;
   margin-right: 16px;
   border-radius: 8px;
   background-color: var(--secondary-dim-clr);
@@ -29,7 +35,7 @@
   font-weight: 600;
 }
 
-.author {
+.caption {
   margin-top: 4px;
   font-size: 14px;
   span {
@@ -40,13 +46,14 @@
 .count {
   font-size: 16px;
   font-weight: 700;
-  margin-right: 4px;
+  margin-right: 6px;
 }
 
 .indexNum {
   width: 18px;
   font-weight: 700;
   font-size: 14px;
+  line-height: 22px;
   opacity: 0.3;
   margin-right: 16px;
 }
