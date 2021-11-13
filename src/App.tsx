@@ -154,6 +154,10 @@ const App = () => {
             setTriggerSearch(!triggerSearch);
           }}
           onChange={() => {}}
+          onClear={() => {
+            setAllCountersState("");
+            setIdState("");
+          }}
         />
         {Bars()}
       </section>

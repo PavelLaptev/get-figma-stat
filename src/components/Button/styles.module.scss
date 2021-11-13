@@ -11,7 +11,7 @@
   border-radius: var(--radius-s);
   transition: all 0.05s ease-in-out;
   &:disabled {
-    opacity: 0.1;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }
@@ -29,7 +29,11 @@
 }
 
 .primary {
-  background: var(--secondary-clr);
+  background: var(--secondary-dim-clr);
+  &:hover:not([disabled]),
+  &:focus:not([disabled]) {
+    background: var(--secondary-semidark-clr);
+  }
 }
 
 .secondary {

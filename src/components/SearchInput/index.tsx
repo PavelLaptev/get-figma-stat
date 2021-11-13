@@ -8,6 +8,7 @@ interface Props {
   value?: string;
   isError?: boolean;
   onSubmit: (value: string) => void;
+  onClear: () => void;
   onChange: (value: string) => void;
 }
 
@@ -29,6 +30,12 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
     props.onSubmit(val);
   };
 
+  const onClear = (e: React.MouseEvent) => {
+    e.preventDefault();
+    props.onClear();
+    setVal("");
+  };
+
   return (
     <section className={styles.wrap} key={story}>
       <form
@@ -44,11 +51,20 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
           className={styles.input}
         />
         <button
-          className={styles.button}
+          className={`${styles.button} ${styles.cross} ${
+            val !== "" ? "" : styles.hidden
+          }`}
+          disabled={val === "" ? true : false}
+          onClick={onClear}
+        >
+          <Icon name="cross" />
+        </button>
+        <button
+          className={`${styles.button}`}
           disabled={val === "" ? true : false}
           onClick={onSubmit}
         >
-          <Icon className={styles.arrow} name="arrow" />
+          <Icon name="enter" />
         </button>
       </form>
       {props.isError ? (

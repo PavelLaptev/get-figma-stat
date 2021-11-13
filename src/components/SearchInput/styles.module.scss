@@ -10,6 +10,7 @@
   height: 80px;
   display: flex;
   border: none;
+  padding: 8px;
   background-color: var(--secondary-dim-clr);
   border: 2px solid var(--secondary-dim-clr);
   border-radius: var(--radius-m);
@@ -27,7 +28,7 @@
   outline: none;
   font-size: 24px;
   font-weight: 600;
-  padding: 0 20px;
+  padding: 0 16px;
   background-color: transparent;
   transition: 0.1s;
   &::placeholder {
@@ -37,13 +38,15 @@
 
 .button {
   cursor: pointer;
+  border-radius: calc(var(--radius-m) - 4px);
   background: none;
-  padding: 16px;
+  padding: 8px 20px;
   border: none;
   outline: none;
   transition: 0.1s;
-  &:hover {
-    background-color: var(--input-hover-clr);
+  &:hover,
+  &:focus {
+    background-color: var(--secondary-semidark-clr);
   }
   &:disabled {
     cursor: not-allowed;
@@ -55,9 +58,9 @@
   }
 }
 
-.arrow {
-  width: 28px;
-  height: 28px;
+.cross {
+  padding: 8px 12px;
+  margin-right: 4px;
 }
 
 .errorMessage {
@@ -76,6 +79,10 @@
   &:focus-within {
     border: 2px solid var(--error-clr);
   }
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes errorAnimation {

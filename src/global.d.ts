@@ -12,5 +12,7 @@ interface IconProps {
     | "likes"
     | "duplicates"
     | "gh"
-    | "user";
+    | "user"
+    | "enter"
+    | "cross";
 }

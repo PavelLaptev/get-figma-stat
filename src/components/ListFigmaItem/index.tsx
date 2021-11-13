@@ -40,7 +40,7 @@ const ListFigmaItem: React.FunctionComponent<Props> = (props) => {
             <div className={styles.caption}>
               <span>by </span>
               <a href={props.caption?.link} target="_blank" rel="noreferrer">
-                {props.caption?.name}{" "}
+                {props.caption?.name}
               </a>
             </div>
           ) : null}

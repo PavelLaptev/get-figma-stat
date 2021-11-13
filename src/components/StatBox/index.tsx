@@ -12,6 +12,9 @@ interface Props {
 }
 
 const StatBox: React.FunctionComponent<Props> = (props) => {
+  const initialShowedItems = 5;
+  const maxChartAmount = 50;
+
   const [pluginsData, setPluginsData] = React.useState<any>();
   const [pluginsTopsAmount, setPluginsTopsAmount] = React.useState<{
     installs: number;
@@ -20,11 +23,11 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
     comments: number;
     users: number;
   }>({
-    installs: 4,
-    views: 4,
-    likes: 4,
-    comments: 4,
-    users: 4,
+    installs: initialShowedItems,
+    views: initialShowedItems,
+    likes: initialShowedItems,
+    comments: initialShowedItems,
+    users: initialShowedItems,
   });
 
   const [filesData, setFilesData] = React.useState<any>();
@@ -35,11 +38,11 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
     comments: number;
     users: number;
   }>({
-    duplicates: 4,
-    views: 4,
-    likes: 4,
-    comments: 4,
-    users: 4,
+    duplicates: initialShowedItems,
+    views: initialShowedItems,
+    likes: initialShowedItems,
+    comments: initialShowedItems,
+    users: initialShowedItems,
   });
 
   ///////////////////////////////////////////////
@@ -73,8 +76,6 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
       </div>
     );
   };
-
-  const maxChartAmount = 50;
 
   const PluginsCards = () => {
     if (pluginsData && filesData) {
@@ -124,7 +125,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: plugin.publisherName,
-                        link: `https://www.figma.com/@${plugin.publisherName}`,
+                        link: `https://www.figma.com/@${plugin.publisherHandle}`,
                       }}
                       count={plugin.installs.toLocaleString()}
                     />
@@ -133,7 +134,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
               disabled={pluginsTopsAmount.installs === maxChartAmount}
               onClick={() =>
@@ -162,7 +163,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: plugin.publisherName,
-                        link: `https://www.figma.com/@${plugin.publisherName}`,
+                        link: `https://www.figma.com/@${plugin.publisherHandle}`,
                       }}
                       count={plugin.likes.toLocaleString()}
                     />
@@ -171,9 +172,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={pluginsTopsAmount.likes === maxChartAmount}
+              disabled={pluginsTopsAmount.likes >= maxChartAmount}
               onClick={() =>
                 setPluginsTopsAmount((prevState) => ({
                   ...prevState,
@@ -200,7 +201,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: plugin.publisherName,
-                        link: `https://www.figma.com/@${plugin.publisherName}`,
+                        link: `https://www.figma.com/@${plugin.publisherHandle}`,
                       }}
                       count={plugin.comments.toLocaleString()}
                     />
@@ -209,9 +210,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={pluginsTopsAmount.comments === maxChartAmount}
+              disabled={pluginsTopsAmount.comments >= maxChartAmount}
               onClick={() =>
                 setPluginsTopsAmount((prevState) => ({
                   ...prevState,
@@ -234,7 +235,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       icon="user"
                       label={{
                         name: user.name,
-                        link: `https://www.figma.com/@${user.publisherName}`,
+                        link: `https://www.figma.com/@${user.publisherHandle}`,
                       }}
                       count={user.followers.toLocaleString()}
                     />
@@ -243,9 +244,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={pluginsTopsAmount.users === maxChartAmount}
+              disabled={pluginsTopsAmount.users >= maxChartAmount}
               onClick={() =>
                 setPluginsTopsAmount((prevState) => ({
                   ...prevState,
@@ -308,7 +309,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: file.publisherName,
-                        link: `https://www.figma.com/@${file.publisherName}`,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
                       }}
                       count={file.duplicates.toLocaleString()}
                     />
@@ -317,9 +318,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={filesTopsAmount.duplicates === maxChartAmount}
+              disabled={filesTopsAmount.duplicates >= maxChartAmount}
               onClick={() =>
                 setFilesTopsAmount((prevState) => ({
                   ...prevState,
@@ -345,7 +346,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: file.publisherName,
-                        link: `https://www.figma.com/@${file.publisherName}`,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
                       }}
                       count={file.likes.toLocaleString()}
                     />
@@ -354,9 +355,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={filesTopsAmount.likes === maxChartAmount}
+              disabled={filesTopsAmount.likes >= maxChartAmount}
               onClick={() =>
                 setFilesTopsAmount((prevState) => ({
                   ...prevState,
@@ -382,7 +383,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       }}
                       caption={{
                         name: file.publisherName,
-                        link: `https://www.figma.com/@${file.publisherName}`,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
                       }}
                       count={file.comments.toLocaleString()}
                     />
@@ -391,9 +392,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={filesTopsAmount.comments === maxChartAmount}
+              disabled={filesTopsAmount.comments >= maxChartAmount}
               onClick={() =>
                 setFilesTopsAmount((prevState) => ({
                   ...prevState,
@@ -405,7 +406,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
 
           <CommonCard title={`Popular file makers`}>
             <div className={styles.commonList}>
-              {pluginsData.topPopularUsers
+              {filesData.topPopularUsers
                 .slice(0, filesTopsAmount.users)
                 .map((user: any, i: number) => {
                   return (
@@ -416,7 +417,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                       icon="user"
                       label={{
                         name: user.name,
-                        link: `https://www.figma.com/@${user.publisherName}`,
+                        link: `https://www.figma.com/@${user.publisherHandle}`,
                       }}
                       count={user.followers.toLocaleString()}
                     />
@@ -425,9 +426,9 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
             </div>
             <Button
               label={"Show more"}
-              mode={"secondary"}
+              mode={"primary"}
               className={styles.showMore}
-              disabled={filesTopsAmount.users === maxChartAmount}
+              disabled={filesTopsAmount.users >= maxChartAmount}
               onClick={() =>
                 setFilesTopsAmount((prevState) => ({
                   ...prevState,

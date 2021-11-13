@@ -40,7 +40,7 @@ const InfoBox: React.FunctionComponent<Props> = (props) => {
             rel="noreferrer"
             className={`${styles.link}`}
           >
-            @{props.info.publisherHandle}
+            {props.info.publisherName}
           </a>
         </div>
 
