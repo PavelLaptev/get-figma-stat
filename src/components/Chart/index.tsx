@@ -40,13 +40,6 @@ const Chart: React.FunctionComponent<Props> = (props) => {
             }
           />
           <Line
-            dataKey={"views"}
-            fill={"var(--chart-1-clr)"}
-            stroke={"var(--chart-1-clr)"}
-            dot={false}
-            strokeWidth={2}
-          />
-          <Line
             dataKey={props.category === "plugins" ? "installs" : "duplicates"}
             fill={"var(--chart-2-clr)"}
             stroke={"var(--chart-2-clr)"}

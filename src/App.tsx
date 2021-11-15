@@ -1,6 +1,5 @@
 import React from "react";
 import Chart from "./components/Chart";
-import SearchSwitcher from "./components/SearchSwitcher";
 import SearchInput from "./components/SearchInput";
 import InfoBox from "./components/InfoBox";
 import Icon from "./components/Icon";
@@ -8,24 +7,9 @@ import StatBox from "./components/StatBox";
 
 import styles from "./app.module.scss";
 
-const getQuery = (string: string) => {
-  const searchParams = new URLSearchParams(window.location.search);
-  return searchParams.get(string) || "";
-};
-
-const setQuery = (query: string, value: string) => {
-  const searchParams = new URLSearchParams(window.location.search);
-  searchParams.set(query, value);
-  window.history.pushState(null, "", `?${searchParams.toString()}`);
-};
-
 const App = () => {
-  const [idState, setIdState] = React.useState(
-    getQuery("id") !== "" ? getQuery("id") : ""
-  );
-  const [categoryState, setCategoryState] = React.useState(
-    getQuery("category") !== "" ? getQuery("category") : "plugins"
-  );
+  const [idState, setIdState] = React.useState("");
+  const [categoryState, setCategoryState] = React.useState("plugins");
 
   const [latestCountersState, setLatestCountersState] = React.useState(
     null as any
@@ -33,11 +17,34 @@ const App = () => {
   const [allCountersState, setAllCountersState] = React.useState(null as any);
   const [infoState, setInfoState] = React.useState(null as any);
 
-  const [triggerSearch, setTriggerSearch] = React.useState(false);
-
   const [errorState, setErrorState] = React.useState(false);
 
   /////////////////////////////////////////////
+
+  const handleSubmit = (value: string) => {
+    if (value.includes("figma.com/community")) {
+      setErrorState(false);
+
+      const cuttedLink = value
+        .split("community")[1]
+        .split("/")
+        .filter((item) => item);
+
+      if (cuttedLink[0] === "plugin") {
+        setCategoryState("plugins");
+      }
+      if (cuttedLink[0] === "widget") {
+        setCategoryState("widgets");
+      }
+      if (cuttedLink[0] === "file") {
+        setCategoryState("hub_files");
+      }
+
+      setIdState(cuttedLink[1]);
+    } else {
+      setErrorState(true);
+    }
+  };
 
   const fetchData = async (id: string, category: string) => {
     const link = {
@@ -104,20 +111,16 @@ const App = () => {
       );
     }
 
-    return <StatBox category={categoryState} />;
+    return <StatBox />;
   };
 
   /////////////////////////////////////////////
 
   React.useEffect(() => {
-    setQuery("id", idState);
-    setQuery("category", categoryState);
-
-    if (getQuery("id") !== "" && getQuery("category") !== "") {
-      console.log("fetching data …");
+    if (idState !== "") {
       fetchData(idState, categoryState);
     }
-  }, [idState, categoryState, triggerSearch]);
+  }, [idState, categoryState]);
 
   /////////////////////////////////////////////
 
@@ -134,31 +137,18 @@ const App = () => {
 
       <section className={styles.wrap}>
         <h1>Figma Charts</h1>
-        <SearchSwitcher
-          value={categoryState}
-          onClick={(value) => {
-            setAllCountersState("");
-            setCategoryState(value);
-          }}
-        />
         <SearchInput
-          value={idState}
           isError={errorState}
-          placeholder={
-            categoryState === "plugins"
-              ? "Find by plugin ID"
-              : "Find by file ID"
-          }
           onSubmit={(value) => {
-            setIdState(value);
-            setTriggerSearch(!triggerSearch);
+            handleSubmit(value);
           }}
-          onChange={() => {}}
           onClear={() => {
+            setErrorState(false);
             setAllCountersState("");
             setIdState("");
           }}
         />
+
         {Bars()}
       </section>
     </main>

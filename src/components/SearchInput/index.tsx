@@ -4,25 +4,20 @@ import Icon from "../../components/Icon";
 
 interface Props {
   className?: string;
-  placeholder?: string;
-  value?: string;
   isError?: boolean;
   onSubmit: (value: string) => void;
   onClear: () => void;
-  onChange: (value: string) => void;
 }
 
 const SearchInput: React.FunctionComponent<Props> = (props) => {
   const [story, setStory] = React.useState(0);
-  const [val, setVal] = React.useState(props.value || "");
+  const [val, setVal] = React.useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value);
-    props.onChange(val);
   };
 
-  const onSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onSubmit = () => {
     if (props.isError) {
       console.log("error");
       setStory(story + 1);
@@ -31,14 +26,13 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
   };
 
   const onClear = (e: React.MouseEvent) => {
-    e.preventDefault();
     props.onClear();
     setVal("");
   };
 
   return (
     <section className={styles.wrap} key={story}>
-      <form
+      <div
         className={`${styles.form} ${props.className} ${
           props.isError ? styles.errorInput : ""
         }`}
@@ -47,8 +41,14 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
           type="text"
           value={val}
           onChange={onChange}
-          placeholder={props.placeholder}
+          placeholder={"Paste a link to a plugin, widget or file"}
           className={styles.input}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              onSubmit();
+            }
+          }}
         />
         <button
           className={`${styles.button} ${styles.cross} ${
@@ -62,11 +62,14 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
         <button
           className={`${styles.button}`}
           disabled={val === "" ? true : false}
-          onClick={onSubmit}
+          onClick={(e) => {
+            e.preventDefault();
+            onSubmit();
+          }}
         >
           <Icon name="enter" />
         </button>
-      </form>
+      </div>
       {props.isError ? (
         <div className={styles.errorMessage}>
           Oops! Can't find it. Check the ID or the category.
@@ -77,7 +80,6 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
 };
 
 SearchInput.defaultProps = {
-  placeholder: "Plugin ID",
   className: "",
 } as Partial<Props>;
 

@@ -3,13 +3,12 @@ import Button from "../Button";
 import styles from "./styles.module.scss";
 
 interface Props {
-  value: string;
   className?: string;
   onClick: (val: string) => void;
 }
 
-const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
-  const [categoryState, setCategoryState] = React.useState(props.value);
+const CategorySwitcher: React.FunctionComponent<Props> = (props) => {
+  const [categoryState, setCategoryState] = React.useState("plugins");
 
   const handleClick = (text: string) => {
     const value = text.toLowerCase().replace(/\s+/g, "_");
@@ -22,25 +21,33 @@ const SearchSwitcher: React.FunctionComponent<Props> = (props) => {
       <Button
         label="Plugins"
         onClick={handleClick}
-        mode={categoryState !== "plugins" ? "ghost" : "secondary"}
+        mode={categoryState === "plugins" ? "secondary" : "ghost"}
         className={`${styles.button} ${
           categoryState === "plugins" ? styles.inactive : ""
         }`}
       />
       <Button
+        label="Widgets"
+        onClick={handleClick}
+        mode={categoryState === "widgets" ? "secondary" : "ghost"}
+        className={`${styles.button} ${
+          categoryState === "widgets" ? styles.inactive : ""
+        }`}
+      />
+      <Button
         label="Hub Files"
         onClick={handleClick}
-        mode={categoryState !== "plugins" ? "secondary" : "ghost"}
+        mode={categoryState === "hub_files" ? "secondary" : "ghost"}
         className={`${styles.button} ${
-          categoryState !== "plugins" ? styles.inactive : ""
+          categoryState === "hub_files" ? styles.inactive : ""
         }`}
       />
     </div>
   );
 };
 
-SearchSwitcher.defaultProps = {
+CategorySwitcher.defaultProps = {
   className: "",
 } as Partial<Props>;
 
-export default SearchSwitcher;
+export default CategorySwitcher;

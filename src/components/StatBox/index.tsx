@@ -1,5 +1,6 @@
 import * as React from "react";
 import CommonCard from "../CommonCard";
+import CategorySwitcher from "../CategorySwitcher";
 import ListItem from "../ListItem";
 import ListFigmaItem from "../ListFigmaItem";
 import Button from "../Button";
@@ -7,16 +8,33 @@ import Button from "../Button";
 import styles from "./styles.module.scss";
 
 interface Props {
-  category: string;
   className?: string;
 }
 
 const StatBox: React.FunctionComponent<Props> = (props) => {
+  const initialCategory = "plugins";
   const initialShowedItems = 5;
   const maxChartAmount = 50;
 
+  const [categoryState, setCategoryState] = React.useState(initialCategory);
+
   const [pluginsData, setPluginsData] = React.useState<any>();
   const [pluginsTopsAmount, setPluginsTopsAmount] = React.useState<{
+    installs: number;
+    views: number;
+    likes: number;
+    comments: number;
+    users: number;
+  }>({
+    installs: initialShowedItems,
+    views: initialShowedItems,
+    likes: initialShowedItems,
+    comments: initialShowedItems,
+    users: initialShowedItems,
+  });
+
+  const [widgetsData, setWidgetsData] = React.useState<any>();
+  const [widgetsTopsAmount, setWidgetsTopsAmount] = React.useState<{
     installs: number;
     views: number;
     likes: number;
@@ -61,6 +79,13 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
         .then((filesData) => {
           console.log(filesData);
           setFilesData(filesData);
+        });
+
+      fetch(`https://pavellaptev.github.io/figma-stat/widgets/common.json`)
+        .then((response) => response.json())
+        .then((widgetsData) => {
+          console.log(widgetsData);
+          setWidgetsData(widgetsData);
         });
     } catch (error) {
       console.error(`Oops! Can't fetch plugins`);
@@ -444,10 +469,211 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
     }
   };
 
+  const WidgetsCards = () => {
+    if (pluginsData && widgetsData) {
+      return (
+        <>
+          <CommonCard
+            title={`${widgetsData.totalAmount.widgets.toLocaleString()} widgets`}
+          >
+            <div className={styles.total}>
+              <ListItem
+                label="installs"
+                icon="installs"
+                value={widgetsData.totalAmount.installs.toLocaleString()}
+              />
+              <ListItem
+                label="Views"
+                icon="views"
+                value={widgetsData.totalAmount.views.toLocaleString()}
+              />
+              <ListItem
+                label="Likes"
+                icon="likes"
+                value={widgetsData.totalAmount.likes.toLocaleString()}
+              />
+              <ListItem
+                label="Comments"
+                icon="comments"
+                value={widgetsData.totalAmount.comments.toLocaleString()}
+              />
+            </div>
+          </CommonCard>
+
+          <CommonCard title={`Top by installs`}>
+            <div className={styles.commonList}>
+              {widgetsData.topInstalls
+                .slice(0, widgetsTopsAmount.installs)
+                .map((file: any, i: number) => {
+                  return (
+                    <ListFigmaItem
+                      key={i}
+                      index={i + 1}
+                      icon="installs"
+                      label={{
+                        name: file.name,
+                        link: `https://www.figma.com/community/widget/${file.id}`,
+                      }}
+                      caption={{
+                        name: file.publisherName,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
+                      }}
+                      count={file.installs.toLocaleString()}
+                    />
+                  );
+                })}
+            </div>
+            <Button
+              label={"Show more"}
+              mode={"primary"}
+              className={styles.showMore}
+              disabled={widgetsTopsAmount.installs >= maxChartAmount}
+              onClick={() =>
+                setWidgetsTopsAmount((prevState) => ({
+                  ...prevState,
+                  installs: widgetsTopsAmount.installs + 5,
+                }))
+              }
+            />
+          </CommonCard>
+
+          <CommonCard title={`Top by likes`}>
+            <div className={styles.commonList}>
+              {widgetsData.topLikes
+                .slice(0, widgetsTopsAmount.likes)
+                .map((file: any, i: number) => {
+                  return (
+                    <ListFigmaItem
+                      key={i}
+                      index={i + 1}
+                      icon="likes"
+                      label={{
+                        name: file.name,
+                        link: `https://www.figma.com/community/widget/${file.id}`,
+                      }}
+                      caption={{
+                        name: file.publisherName,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
+                      }}
+                      count={file.likes.toLocaleString()}
+                    />
+                  );
+                })}
+            </div>
+            <Button
+              label={"Show more"}
+              mode={"primary"}
+              className={styles.showMore}
+              disabled={widgetsTopsAmount.likes >= maxChartAmount}
+              onClick={() =>
+                setWidgetsTopsAmount((prevState) => ({
+                  ...prevState,
+                  likes: widgetsTopsAmount.likes + 5,
+                }))
+              }
+            />
+          </CommonCard>
+
+          <CommonCard title={`Top by comments`}>
+            <div className={styles.commonList}>
+              {widgetsData.topComments
+                .slice(0, widgetsTopsAmount.comments)
+                .map((file: any, i: number) => {
+                  return (
+                    <ListFigmaItem
+                      key={i}
+                      index={i + 1}
+                      icon="comments"
+                      label={{
+                        name: file.name,
+                        link: `https://www.figma.com/community/widget/${file.id}`,
+                      }}
+                      caption={{
+                        name: file.publisherName,
+                        link: `https://www.figma.com/@${file.publisherHandle}`,
+                      }}
+                      count={file.comments.toLocaleString()}
+                    />
+                  );
+                })}
+            </div>
+            <Button
+              label={"Show more"}
+              mode={"primary"}
+              className={styles.showMore}
+              disabled={widgetsTopsAmount.comments >= maxChartAmount}
+              onClick={() =>
+                setWidgetsTopsAmount((prevState) => ({
+                  ...prevState,
+                  comments: widgetsTopsAmount.comments + 5,
+                }))
+              }
+            />
+          </CommonCard>
+
+          <CommonCard title={`Popular widgets makers`}>
+            <div className={styles.commonList}>
+              {widgetsData.topPopularUsers
+                .slice(0, widgetsTopsAmount.users)
+                .map((user: any, i: number) => {
+                  return (
+                    <ListFigmaItem
+                      key={i}
+                      index={i + 1}
+                      imgLink={user.publisherIcon}
+                      icon="user"
+                      label={{
+                        name: user.name,
+                        link: `https://www.figma.com/@${user.publisherHandle}`,
+                      }}
+                      count={user.followers.toLocaleString()}
+                    />
+                  );
+                })}
+            </div>
+            <Button
+              label={"Show more"}
+              mode={"primary"}
+              className={styles.showMore}
+              disabled={widgetsTopsAmount.users >= maxChartAmount}
+              onClick={() =>
+                setWidgetsTopsAmount((prevState) => ({
+                  ...prevState,
+                  users: widgetsTopsAmount.users + 5,
+                }))
+              }
+            />
+          </CommonCard>
+        </>
+      );
+    } else {
+      return <LoadingComponent />;
+    }
+  };
+
+  const showData = () => {
+    if (categoryState === "plugins") {
+      return <PluginsCards />;
+    }
+    if (categoryState === "widgets") {
+      return <WidgetsCards />;
+    }
+    if (categoryState === "hub_files") {
+      return <FilesCards />;
+    }
+  };
+
   return (
-    <section className={`${styles.wrap} ${props.className}`}>
-      {props.category === "plugins" ? <PluginsCards /> : <FilesCards />}
-    </section>
+    <>
+      <CategorySwitcher
+        onClick={(value) => {
+          setCategoryState(value);
+        }}
+      />
+      <section className={`${styles.wrap} ${props.className}`}>
+        {showData()}
+      </section>
+    </>
   );
 };
 
