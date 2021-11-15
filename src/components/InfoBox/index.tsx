@@ -11,6 +11,8 @@ interface Props {
 }
 
 const InfoBox: React.FunctionComponent<Props> = (props) => {
+  console.log(props.counters);
+
   return (
     <section className={styles.wrap}>
       {props.category === "plugins" ? (
@@ -50,7 +52,7 @@ const InfoBox: React.FunctionComponent<Props> = (props) => {
             <span>{props.counters.viewCount.toLocaleString()}</span>
           </div>
 
-          {props.category === "plugins" ? (
+          {props.category === "plugins" || props.category === "widgets" ? (
             <div className={styles.counter}>
               <Icon className={styles.counterIcon} name="installs" />
               <span>{props.counters.installCount.toLocaleString()}</span>

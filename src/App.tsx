@@ -64,8 +64,10 @@ const App = () => {
                 if (data[i - 1]) {
                   return {
                     date: item.date.split("-").reverse().join("."),
-                    [category === "plugins" ? "installs" : "duplicates"]:
-                      category === "plugins"
+                    [category === "plugins" || "widgets"
+                      ? "installs"
+                      : "duplicates"]:
+                      category === "plugins" || "widgets"
                         ? item["installCount"] - data[i - 1]["installCount"]
                         : item["duplicateCount"] -
                           data[i - 1]["duplicateCount"],
