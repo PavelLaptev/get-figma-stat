@@ -8,7 +8,7 @@ $outer-padding: 8px;
   margin-bottom: 16px;
   padding: $outer-padding;
   border-radius: var(--radius-m);
-  background: var(--secondary-dim-clr);
+  background: var(--clr-100);
 }
 
 .button {
@@ -23,7 +23,7 @@ $outer-padding: 8px;
   z-index: 0;
   width: $swithcer-btn-width;
   height: calc(100% - #{$outer-padding * 2});
-  background-color: var(--primary-clr);
+  background-color: var(--clr-black);
   border-radius: var(--radius-s);
 }
 

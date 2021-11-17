@@ -11,13 +11,17 @@
   display: flex;
   border: none;
   padding: 8px;
-  background-color: var(--secondary-dim-clr);
-  border: 2px solid var(--secondary-dim-clr);
+  background-color: var(--clr-100);
+  border: 2px solid transparent;
   border-radius: var(--radius-m);
   transition: all 0.1s ease;
   &:hover,
   &:focus-within {
-    border: 2px solid var(--secondary-dark-clr);
+    border: 2px solid var(--clr-300);
+  }
+  &:focus-within {
+    border: 2px solid var(--clr-500);
+    background-color: var(--clr-white);
   }
 }
 
@@ -26,7 +30,7 @@
   width: 100%;
   border: none;
   outline: none;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   padding: 0 16px;
   background-color: transparent;
@@ -38,15 +42,17 @@
 
 .button {
   cursor: pointer;
+  border: 2px solid transparent;
   border-radius: calc(var(--radius-m) - 4px);
   background: none;
   padding: 8px 20px;
-  border: none;
   outline: none;
   transition: 0.1s;
-  &:hover,
+  &:hover {
+    background-color: var(--clr-100);
+  }
   &:focus {
-    background-color: var(--secondary-semidark-clr);
+    background-color: var(--clr-200);
   }
   &:disabled {
     cursor: not-allowed;
@@ -64,20 +70,22 @@
 }
 
 .errorMessage {
-  margin-top: 4px;
+  margin-top: 8px;
   padding: 8px 10px;
-  background: var(--error-light-clr);
+  background: var(--clr-error-200);
   font-weight: 600;
   border-radius: var(--radius-s);
 }
 
 .errorInput {
-  border: 2px solid var(--error-clr);
+  border: 2px solid var(--clr-error-500);
   animation-name: errorAnimation;
   animation-duration: 0.5s;
+  background: var(--clr-error-100);
   &:hover,
   &:focus-within {
-    border: 2px solid var(--error-clr);
+    border: 2px solid var(--clr-error);
+    background: var(--clr-error-100);
   }
 }
 

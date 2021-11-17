@@ -94,16 +94,8 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
 
   ///////////////////////////////////////////////
 
-  const LoadingComponent = () => {
-    return (
-      <div className={styles.loading}>
-        <div className={styles.loading__text}>Loading...</div>
-      </div>
-    );
-  };
-
   const PluginsCards = () => {
-    if (pluginsData && filesData) {
+    if (pluginsData) {
       return (
         <>
           <CommonCard
@@ -283,12 +275,12 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
         </>
       );
     } else {
-      return <LoadingComponent />;
+      return <CommonCard isLoading />;
     }
   };
 
   const FilesCards = () => {
-    if (pluginsData && filesData) {
+    if (filesData) {
       return (
         <>
           <CommonCard
@@ -465,12 +457,12 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
         </>
       );
     } else {
-      return <LoadingComponent />;
+      return <CommonCard isLoading />;
     }
   };
 
   const WidgetsCards = () => {
-    if (pluginsData && widgetsData) {
+    if (widgetsData) {
       return (
         <>
           <CommonCard
@@ -647,7 +639,7 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
         </>
       );
     } else {
-      return <LoadingComponent />;
+      return <CommonCard isLoading />;
     }
   };
 
