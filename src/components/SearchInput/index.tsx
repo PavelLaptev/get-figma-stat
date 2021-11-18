@@ -39,6 +39,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
       >
         <input
           type="text"
+          autoFocus
           value={val}
           onChange={onChange}
           placeholder={"Paste a link to a plugin, widget or file"}
@@ -50,6 +51,13 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
             }
           }}
         />
+
+        <div
+          className={`${styles.gradienMask} ${
+            props.isError ? styles.gradienMaskError : ""
+          }`}
+        />
+
         <button
           className={`${styles.button} ${styles.cross} ${
             val !== "" ? "" : styles.hidden
@@ -60,7 +68,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
           <Icon name="cross" />
         </button>
         <button
-          className={`${styles.button}`}
+          className={`${styles.button} ${styles.enter}`}
           disabled={val === "" ? true : false}
           onClick={(e) => {
             e.preventDefault();
@@ -70,6 +78,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
           <Icon name="enter" />
         </button>
       </div>
+
       {props.isError ? (
         <div className={styles.errorMessage}>
           Oops! Can't find it. Check the ID or the category.

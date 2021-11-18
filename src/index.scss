@@ -4,7 +4,7 @@
 
 .lightTheme {
   --clr-white: #ffffff;
-  --clr-100: rgba(0, 0, 0, 0.04);
+  --clr-100: #f5f5f5;
   --clr-200: #e6e6e6;
   --clr-300: #dddddd;
   --clr-400: #afafaf;
@@ -25,11 +25,11 @@
   --chart-5-clr: rgb(170, 170, 170);
 
   --clr-error: rgba(255, 68, 85, 1);
-  --clr-error-100: rgba(255, 68, 85, 0.08);
-  --clr-error-200: rgba(255, 68, 85, 0.2);
-  --clr-error-300: rgba(255, 68, 85, 0.3);
-  --clr-error-400: rgba(255, 68, 85, 0.4);
-  --clr-error-500: rgba(255, 68, 85, 0.5);
+  --clr-error-100: rgb(255, 224, 226);
+  --clr-error-200: rgb(255, 203, 207);
+  --clr-error-300: rgb(255, 159, 167);
+  --clr-error-400: rgb(255, 132, 142);
+  --clr-error-500: rgb(255, 96, 109);
 
   --radius-m: 12px;
   --radius-s: 8px;
