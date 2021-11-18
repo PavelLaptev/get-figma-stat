@@ -80,10 +80,8 @@
   background: none;
   outline: none;
   transition: 0.1s;
+  &:focus,
   &:hover {
-    background-color: var(--clr-200);
-  }
-  &:focus {
     background-color: var(--clr-200);
   }
   &:disabled {
@@ -93,6 +91,13 @@
     &:focus {
       background: transparent;
     }
+  }
+}
+
+.errorButton {
+  &:hover,
+  &:focus {
+    background: var(--clr-error-200);
   }
 }
 

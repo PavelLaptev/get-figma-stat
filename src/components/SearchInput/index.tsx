@@ -61,14 +61,16 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
         <button
           className={`${styles.button} ${styles.cross} ${
             val !== "" ? "" : styles.hidden
-          }`}
+          } ${props.isError ? styles.errorButton : ""}`}
           disabled={val === "" ? true : false}
           onClick={onClear}
         >
           <Icon name="cross" />
         </button>
         <button
-          className={`${styles.button} ${styles.enter}`}
+          className={`${styles.button} ${styles.enter} ${
+            props.isError ? styles.errorButton : ""
+          }`}
           disabled={val === "" ? true : false}
           onClick={(e) => {
             e.preventDefault();

@@ -14,11 +14,12 @@
 .leftText {
   display: flex;
   flex-direction: column;
+  margin-right: 24px;
 }
 
 .wrapRight {
   display: flex;
-  align-items: center;
+  // align-items: center;
 }
 
 .image {

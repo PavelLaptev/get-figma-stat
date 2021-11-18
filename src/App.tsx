@@ -152,6 +152,62 @@ const App = () => {
         />
 
         {Bars()}
+
+        <footer className={styles.footer}>
+          <p className={styles.footerText}>
+            Everyday at 6 am (UTC timezone) the github script captures all
+            avalible Figma plugins, files and widgets data. All information is
+            stored in a separate{" "}
+            <a
+              className={styles.footerLink}
+              href="https://github.com/PavelLaptev/figma-stat/tree/gh-pages"
+              rel="noreferrer"
+              target="_blank"
+            >
+              github branch
+            </a>{" "}
+            and divided into three folders —{" "}
+            <a
+              className={styles.footerLink}
+              href="https://github.com/PavelLaptev/figma-stat/tree/gh-pages/plugins"
+              rel="noreferrer"
+              target="_blank"
+            >
+              plugins
+            </a>
+            ,{" "}
+            <a
+              className={styles.footerLink}
+              href="https://github.com/PavelLaptev/figma-stat/tree/gh-pages/hub_files"
+              rel="noreferrer"
+              target="_blank"
+            >
+              hub_files
+            </a>{" "}
+            and{" "}
+            <a
+              className={styles.footerLink}
+              href="https://github.com/PavelLaptev/figma-stat/tree/gh-pages/widgets"
+              rel="noreferrer"
+              target="_blank"
+            >
+              widgets
+            </a>
+            .
+          </p>
+          <p className={styles.footerText}>
+            You can read more about and how to use this stats in{" "}
+            <a
+              className={styles.footerLink}
+              href="https://github.com/PavelLaptev/figma-stat"
+              rel="noreferrer"
+              target="_blank"
+            >
+              the main branch of the repository
+            </a>
+            .
+          </p>
+        </footer>
       </section>
     </main>
   );
