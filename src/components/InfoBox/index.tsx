@@ -47,10 +47,10 @@ const InfoBox: React.FunctionComponent<Props> = (props) => {
         </div>
 
         <div className={styles.counters}>
-          <div className={styles.counter}>
+          {/* <div className={styles.counter}>
             <Icon className={styles.counterIcon} name="views" />
             <span>{props.counters.viewCount.toLocaleString()}</span>
-          </div>
+          </div> */}
 
           {props.category === "plugins" || props.category === "widgets" ? (
             <div className={styles.counter}>
