@@ -107,11 +107,11 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                 icon="installs"
                 value={pluginsData.totalAmount.installs.toLocaleString()}
               />
-              <ListItem
+              {/* <ListItem
                 label="Views"
                 icon="views"
                 value={pluginsData.totalAmount.views.toLocaleString()}
-              />
+              /> */}
               <ListItem
                 label="Likes"
                 icon="likes"
@@ -292,11 +292,11 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                 icon="duplicates"
                 value={filesData.totalAmount.duplicates.toLocaleString()}
               />
-              <ListItem
+              {/* <ListItem
                 label="Views"
                 icon="views"
                 value={filesData.totalAmount.views.toLocaleString()}
-              />
+              /> */}
               <ListItem
                 label="Likes"
                 icon="likes"
@@ -474,11 +474,11 @@ const StatBox: React.FunctionComponent<Props> = (props) => {
                 icon="installs"
                 value={widgetsData.totalAmount.installs.toLocaleString()}
               />
-              <ListItem
+              {/* <ListItem
                 label="Views"
                 icon="views"
                 value={widgetsData.totalAmount.views.toLocaleString()}
-              />
+              /> */}
               <ListItem
                 label="Likes"
                 icon="likes"

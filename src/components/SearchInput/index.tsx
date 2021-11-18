@@ -10,6 +10,8 @@ interface Props {
 }
 
 const SearchInput: React.FunctionComponent<Props> = (props) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
   const [story, setStory] = React.useState(0);
   const [val, setVal] = React.useState("");
 
@@ -28,6 +30,10 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
   const onClear = (e: React.MouseEvent) => {
     props.onClear();
     setVal("");
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -39,6 +45,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
       >
         <input
           type="text"
+          ref={inputRef}
           autoFocus
           value={val}
           onChange={onChange}
@@ -83,7 +90,7 @@ const SearchInput: React.FunctionComponent<Props> = (props) => {
 
       {props.isError ? (
         <div className={styles.errorMessage}>
-          Oops! Can't find it. Check the ID or the category.
+          Oops! Can't find it. Сheck the link for typos.
         </div>
       ) : null}
     </section>
