@@ -150,13 +150,12 @@ const App = () => {
             setIdState("");
           }}
         />
-
         {Bars()}
 
         <footer className={styles.footer}>
           <p className={styles.footerText}>
-            Everyday at 6 am (UTC timezone) the github script captures all
-            avalible Figma plugins, files and widgets data. All information is
+            Every day at 6 am (UTC timezone) the GitHub script captures all
+            available Figma plugins, files and widgets data. All information is
             stored in a separate{" "}
             <a
               className={styles.footerLink}
@@ -164,7 +163,7 @@ const App = () => {
               rel="noreferrer"
               target="_blank"
             >
-              github branch
+              GitHub branch
             </a>{" "}
             and divided into three folders —{" "}
             <a
@@ -196,7 +195,7 @@ const App = () => {
             .
           </p>
           <p className={styles.footerText}>
-            You can read more about and how to use this stats in{" "}
+            You can read more about and how to use these stats in{" "}
             <a
               className={styles.footerLink}
               href="https://github.com/PavelLaptev/figma-stat"
